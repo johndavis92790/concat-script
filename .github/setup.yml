@@ -1,0 +1,32 @@
+name: Setup Concat Script
+
+on:
+  workflow_dispatch:
+    inputs:
+      repo:
+        description: 'Repository to set up (format: owner/repo)'
+        required: true
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up repository
+        run: |
+          echo "Setting up ${{ github.event.inputs.repo }}"
+          git clone https://github.com/${{ github.event.inputs.repo }}.git
+          cd $(echo ${{ github.event.inputs.repo }} | cut -d'/' -f2)
+          echo -e "/.git\n/.vscode\n.eslintrc.json\noutput.md\n/node_modules" >> .gitignore
+          mkdir -p .vscode
+          echo '{"version":"2.0.0","tasks":[{"label":"Run concat.js","type":"shell","command":"npm run pretty; node concat.js","options":{"cwd":"${workspaceFolder}"},"presentation":{"close":false}}]}' > .vscode/tasks.json
+          echo '{"extends":["react-app","react-app/jest"]}' > .eslintrc.json
+          npm install --save-dev puppeteer cross-spawn prettier clipboardy
+          mkdir -p .github/workflows
+          cp ../../setup-concat.yml .github/workflows/
+          git add .
+          git commit -m "Add setup files"
+          git push

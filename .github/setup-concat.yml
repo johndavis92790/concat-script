@@ -1,0 +1,34 @@
+name: Setup Concat Script
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Run daily at midnight
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Checkout concat-script repository
+        uses: actions/checkout@v2
+        with:
+          repository: johndavis92790/concat-script
+          path: concat-script
+
+      - name: Run setup script
+        run: |
+          cp -r concat-script/* .
+          npm install
+          npm run pretty
+          node concat.js
+
+      - name: Commit changes
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add .
+          git commit -m "Automated setup"
+          git push
