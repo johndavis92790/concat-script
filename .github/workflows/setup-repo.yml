@@ -16,9 +16,11 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Set up repository
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           echo "Setting up ${{ github.event.inputs.repo }}"
-          git clone https://github.com/${{ github.event.inputs.repo }}.git
+          git clone https://${{ github.actor }}:${{ secrets.GH_TOKEN }}@github.com/${{ github.event.inputs.repo }}.git
           cd $(echo ${{ github.event.inputs.repo }} | cut -d'/' -f2)
           echo "Creating .gitignore"
           echo -e "/.git\n/.vscode\n.eslintrc.json\noutput.md\n/node_modules" >> .gitignore
@@ -29,14 +31,16 @@ jobs:
           echo "Creating .eslintrc.json"
           echo '{"extends":["react-app","react-app/jest"]}' > .eslintrc.json
           echo "Installing dependencies"
-          npm install --save-dev puppeteer cross-spawn prettier clipboardy
+          npm install puppeteer cross-spawn prettier clipboardy
           echo "Creating .github/workflows directory"
           mkdir -p .github/workflows
           echo "Copying update-script.yml"
           cp ../../update-script.yml .github/workflows/
           echo "Adding changes"
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
           git add .
           echo "Committing changes"
           git commit -m "Add setup files"
           echo "Pushing changes"
-          git push https://johndavis92790:${{ secrets.GH_TOKEN }}@github.com/${{ github.event.inputs.repo }}.git
+          git push https://${{ github.actor }}:${{ secrets.GH_TOKEN }}@github.com/${{ github.event.inputs.repo }}.git
