@@ -16,6 +16,8 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Set up repository
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           echo "Setting up ${{ github.event.inputs.repo }}"
           git clone https://github.com/${{ github.event.inputs.repo }}.git
@@ -39,4 +41,4 @@ jobs:
           echo "Committing changes"
           git commit -m "Add setup files"
           echo "Pushing changes"
-          git push https://${{ secrets.GH_TOKEN }}@github.com/${{ github.event.inputs.repo }}.git
+          git push https://x-access-token:$GH_TOKEN@github.com/${{ github.event.inputs.repo }}.git
