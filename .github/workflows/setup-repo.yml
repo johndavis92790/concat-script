@@ -28,9 +28,9 @@ jobs:
           echo "Creating .gitignore"
           echo "output.md" >> .gitignore
           echo "Creating .vscode directory"
-          mkdir .vscode
+          mkdir -p .vscode/
           echo "Copying tasks.json"
-          cp .vscode/tasks.json .vscode/
+          cp ../concat-script/.vscode/tasks.json .vscode/
           echo "Installing dependencies"
           npm install puppeteer cross-spawn prettier clipboardy --force
           echo "Creating .github/workflows directory"
