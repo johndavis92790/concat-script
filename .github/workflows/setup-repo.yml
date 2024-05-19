@@ -20,13 +20,23 @@ jobs:
           echo "Setting up ${{ github.event.inputs.repo }}"
           git clone https://github.com/${{ github.event.inputs.repo }}.git
           cd $(echo ${{ github.event.inputs.repo }} | cut -d'/' -f2)
+          echo "Creating .gitignore"
           echo -e "/.git\n/.vscode\n.eslintrc.json\noutput.md\n/node_modules" >> .gitignore
+          echo "Creating .vscode directory"
           mkdir -p .vscode
+          echo "Creating tasks.json"
           echo '{"version":"2.0.0","tasks":[{"label":"Run concat.js","type":"shell","command":"npm run pretty; node concat.js","options":{"cwd":"${workspaceFolder}"},"presentation":{"close":false}}]}' > .vscode/tasks.json
+          echo "Creating .eslintrc.json"
           echo '{"extends":["react-app","react-app/jest"]}' > .eslintrc.json
+          echo "Installing dependencies"
           npm install --save-dev puppeteer cross-spawn prettier clipboardy
+          echo "Creating .github/workflows directory"
           mkdir -p .github/workflows
-          cp ../../setup-concat.yml .github/workflows/
+          echo "Copying update-script.yml"
+          cp ../../update-script.yml .github/workflows/
+          echo "Adding changes"
           git add .
+          echo "Committing changes"
           git commit -m "Add setup files"
+          echo "Pushing changes"
           git push
