@@ -15,6 +15,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Checkout target repository
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ github.event.inputs.repo }}
+          token: ${{ secrets.GH_TOKEN }}
+          path: target-repo
+
       - name: Set up repository
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
