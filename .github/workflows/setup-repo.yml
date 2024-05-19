@@ -26,19 +26,19 @@ jobs:
           git clone https://${{ github.actor }}:${{ secrets.GH_TOKEN }}@github.com/${{ github.event.inputs.repo }}.git
           cd $(echo ${{ github.event.inputs.repo }} | cut -d'/' -f2)
           echo "Creating .gitignore"
-          echo -e "/.git\n/.vscode\n.eslintrc.json\noutput.md\n/node_modules" >> .gitignore
+          echo "output.md" >> .gitignore
           echo "Creating .vscode directory"
           mkdir -p .vscode
           echo "Creating tasks.json"
           echo '{"version":"2.0.0","tasks":[{"label":"Run concat.js","type":"shell","command":"npm run pretty; node concat.js","options":{"cwd":"${workspaceFolder}"},"presentation":{"close":false}}]}' > .vscode/tasks.json
-          echo "Creating .eslintrc.json"
-          echo '{"extends":["react-app","react-app/jest"]}' > .eslintrc.json
           echo "Installing dependencies"
           npm install puppeteer cross-spawn prettier clipboardy --force
           echo "Creating .github/workflows directory"
           mkdir -p .github/workflows
           echo "Copying update-script.yml"
           cp ../concat-script/.github/workflows/update-script.yml .github/workflows/
+          echo "Copying concat.js"
+          cp ../concat-script/concat.js ../concat-script
           echo "Adding changes"
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
