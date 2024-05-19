@@ -30,7 +30,7 @@ jobs:
           echo "Creating .vscode directory"
           mkdir .vscode
           echo "Copying tasks.json"
-          cp ../concat-script/.vscode/tasks.json .vscode/
+          cp .vscode/tasks.json .vscode/
           echo "Installing dependencies"
           npm install puppeteer cross-spawn prettier clipboardy --force
           echo "Creating .github/workflows directory"
