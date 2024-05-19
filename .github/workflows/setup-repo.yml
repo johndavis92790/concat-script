@@ -15,7 +15,7 @@ jobs:
       - name: Checkout concat-script repository
         uses: actions/checkout@v3
         with:
-          repository: your-username/concat-script
+          repository: johndavis92790/concat-script
           path: concat-script
 
       - name: Set up repository
