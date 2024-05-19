@@ -26,6 +26,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
+          cd target-repo
           echo "Setting up ${{ github.event.inputs.repo }}"
           git clone https://github.com/${{ github.event.inputs.repo }}.git
           cd $(echo ${{ github.event.inputs.repo }} | cut -d'/' -f2)
@@ -48,4 +49,4 @@ jobs:
           echo "Committing changes"
           git commit -m "Add setup files"
           echo "Pushing changes"
-          git push https://x-access-token:$GH_TOKEN@github.com/${{ github.event.inputs.repo }}.git
+          git push
