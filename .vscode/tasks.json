@@ -4,7 +4,7 @@
     {
       "label": "Run concat.js",
       "type": "shell",
-      "command": "npm i; npm run pretty; node concat.js",
+      "command": "npm i puppeteer cross-spawn prettier clipboardy --force; npm run pretty; node concat.js",
       "options": {
         "cwd": "${workspaceFolder}"
       },
