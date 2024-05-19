@@ -1,4 +1,4 @@
-name: Setup Concat Script
+name: Setup Repository
 
 on:
   workflow_dispatch:
