@@ -27,10 +27,9 @@ jobs:
           cd $(echo ${{ github.event.inputs.repo }} | cut -d'/' -f2)
           echo "Creating .gitignore"
           echo "output.md" >> .gitignore
-          echo "Creating .vscode directory"
-          mkdir -p .vscode
-          echo "Creating tasks.json"
-          mkdir -p .vscode
+          echo "Creating .vscode/ directory"
+          mkdir -p .vscode/
+          echo "Copying tasks.json"
           cp ../concat-script/.vscode/tasks.json .vscode/
           echo "Installing dependencies"
           npm install puppeteer cross-spawn prettier clipboardy --force
