@@ -31,7 +31,7 @@ jobs:
           echo "Creating .eslintrc.json"
           echo '{"extends":["react-app","react-app/jest"]}' > .eslintrc.json
           echo "Installing dependencies"
-          npm install puppeteer cross-spawn prettier clipboardy
+          npm install puppeteer cross-spawn prettier clipboardy --force
           echo "Creating .github/workflows directory"
           mkdir -p .github/workflows
           echo "Copying update-script.yml"
