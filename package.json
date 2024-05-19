@@ -1,0 +1,26 @@
+{
+  "name": "concat-script",
+  "version": "1.0.0",
+  "description": "",
+  "main": "concat.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pretty": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,html,css,scss,md}\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johndavis92790/concat-script.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/johndavis92790/concat-script/issues"
+  },
+  "homepage": "https://github.com/johndavis92790/concat-script#readme",
+  "dependencies": {
+    "clipboardy": "^4.0.0",
+    "cross-spawn": "^7.0.3",
+    "prettier": "^3.2.5",
+    "puppeteer": "^22.9.0"
+  }
+}
