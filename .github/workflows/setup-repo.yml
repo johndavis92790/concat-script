@@ -30,7 +30,8 @@ jobs:
           echo "Creating .vscode directory"
           mkdir -p .vscode
           echo "Creating tasks.json"
-          echo '{"version":"2.0.0","tasks":[{"label":"Run concat.js","type":"shell","command":"npm run pretty; node concat.js","options":{"cwd":"${workspaceFolder}"},"presentation":{"close":false}}]}' > .vscode/tasks.json
+          mkdir -p .vscode
+          cp ../concat-script/.vscode/tasks.json .vscode/
           echo "Installing dependencies"
           npm install puppeteer cross-spawn prettier clipboardy --force
           echo "Creating .github/workflows directory"
